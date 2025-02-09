@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "concurrently -c green.bold, blue.bold 'pnpm:dev:next' 'pnpm:dev:docker'",
+    "dev": "concurrently -c green.bold, blue.bold, red.bold 'pnpm:dev:next' 'pnpm:dev:docker' 'pnpm prisma studio'",
     "dev:docker": "docker compose up",
     "dev:next": "next dev",
     "build": "next build",
@@ -12,21 +12,37 @@
     "postinstall": "prisma generate"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.10.0",
     "@prisma/client": "6.3.1",
     "@tailwindcss/postcss": "^4.0.4",
+    "@trpc/client": "^10.45.2",
+    "@trpc/next": "^10.45.2",
+    "@trpc/react-query": "^10.45.2",
+    "@trpc/server": "^10.45.2",
+    "class-variance-authority": "^0.7.1",
+    "date-fns": "^4.1.0",
+    "iron-session": "^8.0.4",
+    "lucide-react": "^0.475.0",
     "next": "15.1.6",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-hook-form": "^7.54.2",
+    "secure-password": "^4.0.0",
+    "superjson": "^2.2.2",
+    "zod": "^3.24.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/secure-password": "^4.0.2",
     "concurrently": "^8.2.2",
     "eslint": "^9",
     "eslint-config-next": "15.1.6",
     "postcss": "^8.5.1",
+    "prettier": "^3.4.2",
+    "prettier-plugin-tailwindcss": "^0.6.11",
     "prisma": "^6.3.1",
     "tailwindcss": "^4.0.4",
     "typescript": "^5"
