@@ -44,7 +44,12 @@ export function Login() {
                         error={login.error?.message}
                     />
 
-                    <Input {...form.register('username')} label="Usuario" />
+                    <Input
+                        {...form.register('username')}
+                        autoFocus
+                        label="Usuario"
+                        autoCapitalize="off"
+                    />
 
                     <Input
                         {...form.register('password')}

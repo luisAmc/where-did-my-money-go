@@ -2,14 +2,24 @@ import { cva, VariantProps } from 'class-variance-authority';
 import { ComponentPropsWithRef, forwardRef } from 'react';
 import { FieldError } from './FieldError';
 
-export const inputVariants = cva([
-    'bg-transparent px-3 py-2 text-[16px] md:text-sm h-9 w-full min-w-0 rounded-lg border border-solid border-primary text-primary placeholder:text-muted-foreground',
-    'focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-1',
-    'disabled:opacity-60 disabled:pointer-events-none',
-    'appearance-none transition ease-in-out',
-    // 'flex h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow]',
-    // 'placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground',
-]);
+export const inputVariants = cva(
+    [
+        'rounded-lg px-3 py-2 text-[16px] md:text-sm h-10 w-full min-w-0 text-primary placeholder:text-muted-foreground',
+        'disabled:opacity-60 disabled:pointer-events-none focus:outline-none appearance-none transition ease-in-out',
+        'border border-transparent focus:border-border focus:ring-2 focus:ring-ring focus:ring-offset-1',
+    ],
+    {
+        variants: {
+            variant: {
+                default: 'bg-foreground/5',
+                ghost: 'focus:bg-foreground/5',
+            },
+        },
+        defaultVariants: {
+            variant: 'default',
+        },
+    },
+);
 
 interface InputProps
     extends VariantProps<typeof inputVariants>,
@@ -19,7 +29,7 @@ interface InputProps
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
-    { label, type = 'text', hideError = false, className, ...props },
+    { label, type = 'text', variant, hideError = false, className, ...props },
     ref,
 ) {
     return (
@@ -32,8 +42,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
 
             <input
                 ref={ref}
-                className={inputVariants({ className })}
+                className={inputVariants({ variant, className })}
                 type={type}
+                autoComplete={props.autoComplete || 'off'}
                 {...props}
             />
 

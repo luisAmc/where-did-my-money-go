@@ -1,6 +1,7 @@
 import { cva, VariantProps } from 'class-variance-authority';
 import { ButtonOrLink, ButtonOrLinkProps } from './ButtonOrLink';
 import { forwardRef } from 'react';
+import { cn } from '~/utils/cn';
 
 export const buttonVariants = cva(
     [
@@ -18,7 +19,7 @@ export const buttonVariants = cva(
                 link: 'text-primary underline-offset-4 hover:underline',
             },
             size: {
-                default: 'h-9 px-4 py-2 has-[>svg]:px-3',
+                default: 'h-10 px-4 py-2 has-[>svg]:px-3',
                 icon: 'size-9',
             },
         },
@@ -34,11 +35,11 @@ export interface ButtonProps
         ButtonOrLinkProps {}
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-    function Button({ variant, size, children, ...props }, ref) {
+    function Button({ variant, size, children, className, ...props }, ref) {
         return (
             <ButtonOrLink
                 ref={ref}
-                className={buttonVariants({ variant, size })}
+                className={cn(buttonVariants({ variant, size, className }))}
                 {...props}
             >
                 {children}

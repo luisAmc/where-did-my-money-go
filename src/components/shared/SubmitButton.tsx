@@ -6,7 +6,11 @@ export function SubmitButton({ children, ...props }: ButtonProps) {
     const { formState } = useFormContext();
 
     return (
-        <Button type="submit" {...props}>
+        <Button
+            type="submit"
+            {...props}
+            disabled={!formState.isValid || formState.isSubmitting}
+        >
             {formState.isSubmitting && (
                 <LoaderCircleIcon className="mr-3 -ml-1 size-5 animate-spin" />
             )}

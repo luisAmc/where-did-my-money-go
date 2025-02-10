@@ -35,10 +35,9 @@ model Transaction {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  description String?
-  place       String?
-  date        DateTime @default(now())
-  amount      Decimal  @default(0) @db.Decimal(19, 2)
+  notes  String?
+  date   DateTime @default(now())
+  amount Decimal  @default(0) @db.Decimal(9, 2)
 
   category   Category @relation(fields: [categoryId], references: [id])
   categoryId String
