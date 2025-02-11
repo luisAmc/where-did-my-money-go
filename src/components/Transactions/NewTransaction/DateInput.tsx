@@ -33,7 +33,7 @@ export const DateInput = forwardRef<HTMLInputElement, DateInputProps>(
                     />
                 </div>
 
-                {!hideError && <FieldError name={props.name} />}
+                {/* {!hideError && <FieldError name={props.name} />} */}
             </label>
         );
     },

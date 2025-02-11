@@ -23,6 +23,7 @@ export const transactionsRouter = createTRPCRouter({
                     id: true,
                     amount: true,
                     date: true,
+                    store: true,
                     notes: true,
                     category: {
                         select: {
@@ -92,6 +93,7 @@ export const transactionsRouter = createTRPCRouter({
         .input(
             z.object({
                 amount: z.number().min(0),
+                store: stringShape,
                 notes: stringShape.nullish(),
                 date: z.date(),
                 category: stringShape,
@@ -112,6 +114,7 @@ export const transactionsRouter = createTRPCRouter({
             return db.transaction.create({
                 data: {
                     amount: new Prisma.Decimal(input.amount),
+                    store: input.store,
                     notes: input.notes,
                     date: input.date,
                     categoryId: category.id,
@@ -119,5 +122,31 @@ export const transactionsRouter = createTRPCRouter({
                     userId: session.userId,
                 },
             });
+        }),
+
+    summary: privateProcedure
+        .input(
+            z.object({
+                from: z.date(),
+                to: z.date(),
+            }),
+        )
+        .query(async ({ ctx: { db, session }, input }) => {
+            const summary = await db.transaction.aggregate({
+                where: {
+                    userId: session.userId,
+                },
+                _sum: {
+                    amount: true,
+                },
+                _count: {
+                    id: true,
+                },
+            });
+
+            return {
+                total: summary._sum.amount?.toNumber() ?? 0,
+                count: summary._count.id,
+            };
         }),
 });

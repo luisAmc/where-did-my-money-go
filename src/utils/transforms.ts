@@ -14,6 +14,20 @@ export function formatDate(
     return format(date, pattern, { locale: esLocale });
 }
 
+export function formatAmount(
+    amount: number,
+    options = { maximumFractionDigits: 2 },
+) {
+    if (amount == null || isNaN(amount)) {
+        return '-';
+    }
+
+    return amount.toLocaleString('en', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: options.maximumFractionDigits,
+    });
+}
+
 export function plainDateToLocal(plainDateString: string) {
     const [year, month, day] = plainDateString.split('-');
 

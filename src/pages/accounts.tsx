@@ -3,4 +3,4 @@ import { authenticatedRoute } from '~/utils/redirects';
 
 export const getServerSideProps: GetServerSideProps = authenticatedRoute;
 
-export { NewExpense as default } from '~/components/Transactions/NewExpense';
+export { Accounts as default } from '~/components/Accounts';

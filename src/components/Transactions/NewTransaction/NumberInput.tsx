@@ -12,6 +12,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
                     ref={ref}
                     type="number"
                     inputMode="decimal"
+                    step="0.01"
                     className={cn(
                         inputVariants({ variant: 'default' }),
                         'h-auto text-center text-7xl md:text-7xl',

@@ -46,6 +46,7 @@ export function Drawer({
                 />
 
                 <VaulDrawer.Content
+                    aria-describedby={undefined}
                     className={cn(
                         'bg-background fixed bottom-0 z-50 mt-24 flex flex-col border',
                         {
@@ -59,13 +60,13 @@ export function Drawer({
                     <div
                         className={cn(
                             'mx-auto my-4',
-                            dismissible
+                            dismissible && direction === 'default'
                                 ? 'bg-muted h-2 w-[100px] rounded-full'
                                 : 'my-3',
                         )}
                     />
 
-                    <div className="mx-auto mb-4 w-full max-w-sm">
+                    <div className="mx-auto mb-8 w-full max-w-md px-4">
                         <VaulDrawer.Title className="text-primary text-lg font-medium">
                             {title}
                         </VaulDrawer.Title>
