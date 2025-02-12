@@ -2,7 +2,6 @@ import { api } from '~/utils/api';
 import { Button } from './shared/Button';
 import { formatDate } from '~/utils/transforms';
 import { LogOutIcon } from 'lucide-react';
-import { SettingsDrawer } from './Home/SettingsDrawer';
 import { type ReactNode } from 'react';
 import { useAuthRedirect } from '~/utils/useAuthRedirect';
 
@@ -31,7 +30,7 @@ function Header() {
     });
 
     return (
-        <nav className="bg-primary text-primary-foreground sticky top-0 z-10 flex items-center justify-between p-4">
+        <nav className="bg-primary text-primary-foreground sticky top-0 z-10 flex items-center justify-start p-4">
             <Button
                 size="icon"
                 variant="ghost"
@@ -40,7 +39,7 @@ function Header() {
                 <LogOutIcon className="text-primary-foreground size-5" />
             </Button>
 
-            <div className="flex flex-col items-center">
+            <div className="absolute left-1/2 flex -translate-x-1/2 flex-col items-center">
                 <div className="text-muted-foreground text-xs font-medium uppercase">
                     Hoy es
                 </div>
@@ -49,7 +48,7 @@ function Header() {
                 </div>
             </div>
 
-            <SettingsDrawer />
+            {/* <SettingsDrawer /> */}
         </nav>
     );
 }

@@ -1,0 +1,29 @@
+{
+    "theme_color": "#09090b",
+    "background_color": "#09090b",
+    "display": "standalone",
+    "scope": "/",
+    "start_url": "/",
+    "id": "/",
+    "name": "Where did my money go?",
+    "short_name": "Where did my money go?",
+    "description": "An expenses tracker app",
+    "icons": [
+        {
+            "src": "/icons/icon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/icons/icon-384x384.png",
+            "sizes": "384x384",
+            "type": "image/png"
+        },
+        {
+            "src": "/icons/maskable.png",
+            "sizes": "512x512",
+            "type": "image/x-icon",
+            "purpose": "maskable"
+        }
+    ]
+}

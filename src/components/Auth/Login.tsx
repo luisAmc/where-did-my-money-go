@@ -7,6 +7,7 @@ import { stringShape } from '~/utils/shapes';
 import { Input } from '../shared/Input';
 import { SubmitButton } from '../shared/SubmitButton';
 import { ErrorMessage } from '../shared/ErrorMessage';
+import Image from 'next/image';
 
 const loginSchema = z.object({
     username: stringShape.min(1, 'Ingrese su usuario.'),
@@ -28,8 +29,17 @@ export function Login() {
     const form = useZodForm({ schema: loginSchema });
 
     return (
-        <div className="flex items-center justify-center">
-            <div className="w-full max-w-md rounded-xl bg-amber-200 p-4">
+        <div className="flex h-full items-center justify-center">
+            <div className="w-full max-w-md rounded-xl p-4">
+                <div className="flex justify-center">
+                    <Image
+                        src="/images/kitty-picture.webp"
+                        width={334}
+                        height={400}
+                        alt="login illustration"
+                    />
+                </div>
+
                 <Form
                     form={form}
                     onSubmit={(input) =>
