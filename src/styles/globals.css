@@ -89,3 +89,11 @@ input[type='date']::-webkit-calendar-picker-indicator {
     top: 0;
     width: auto;
 }
+
+#nprogress {
+    @apply pointer-events-none z-50;
+}
+
+#nprogress .bar {
+    @apply bg-accent fixed top-0 left-0 z-50 h-0.5 w-full;
+}
