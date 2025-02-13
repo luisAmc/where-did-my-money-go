@@ -15,11 +15,11 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         return (
             <textarea
                 ref={ref}
+                rows={2}
                 className={cn(
                     inputVariants({ variant, className }),
                     'field-sizing-content h-auto resize-none',
                 )}
-                rows={1}
                 {...props}
             />
         );

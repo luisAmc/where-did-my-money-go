@@ -83,6 +83,11 @@ export function NewTransaction() {
                         enterKeyHint="next"
                     />
 
+                    <div className="grid grid-cols-2 gap-x-2">
+                        <CategoryPicker />
+                        <AccountPicker />
+                    </div>
+
                     <Input
                         {...form.register('store')}
                         placeholder="¿Dónde fue?"
@@ -92,11 +97,6 @@ export function NewTransaction() {
                         {...form.register('notes')}
                         placeholder="Notas (Opcional)"
                     />
-
-                    <div className="grid grid-cols-2 gap-x-2">
-                        <CategoryPicker />
-                        <AccountPicker />
-                    </div>
 
                     <DateInput {...form.register('date')} />
 

@@ -26,7 +26,7 @@ export function Home() {
 
             <div className="pb-24"></div>
 
-            <div className="bg-primary-foreground fixed bottom-6 left-6 space-x-2 rounded-lg border px-2 py-1 shadow">
+            <div className="bg-secondary border-border/10 fixed bottom-6 left-6 space-x-2 rounded-lg border px-2 py-1 shadow">
                 <Button
                     variant="ghost"
                     size="icon"

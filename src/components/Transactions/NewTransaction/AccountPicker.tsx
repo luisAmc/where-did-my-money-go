@@ -47,15 +47,16 @@ export function AccountPicker() {
                             <Button
                                 key={account.id}
                                 className={cn(
-                                    'justify-start rounded-full',
+                                    'h-12 justify-start',
                                     isSelected
                                         ? 'bg-primary text-primary-foreground'
-                                        : 'opacity-50 [&_svg]:invisible',
+                                        : '[&_svg]:invisible',
                                 )}
                                 onClick={() => {
                                     field.onChange(account.id);
                                     drawer.close();
                                 }}
+                                variant="outlined"
                             >
                                 <CheckIcon className="size-4" />
                                 <span>{account.name}</span>

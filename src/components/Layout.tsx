@@ -40,15 +40,13 @@ function Header() {
             </Button>
 
             <div className="absolute left-1/2 flex -translate-x-1/2 flex-col items-center">
-                <div className="text-muted-foreground text-xs font-medium uppercase">
+                <div className="text-primary-foreground text-xs font-medium uppercase">
                     Hoy es
                 </div>
                 <div className="text-primary-foreground font-medium capitalize">
                     {formatDate(today, 'E, d MMM')}
                 </div>
             </div>
-
-            {/* <SettingsDrawer /> */}
         </nav>
     );
 }

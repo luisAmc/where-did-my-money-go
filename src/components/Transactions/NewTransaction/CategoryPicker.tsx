@@ -48,15 +48,16 @@ export function CategoryPicker() {
                             <Button
                                 key={category.id}
                                 className={cn(
-                                    'justify-start rounded-full',
+                                    'h-12 justify-start',
                                     isSelected
                                         ? 'bg-primary text-primary-foreground'
-                                        : 'opacity-50 [&_svg]:invisible',
+                                        : '[&_svg]:invisible',
                                 )}
                                 onClick={() => {
                                     field.onChange(category.id);
                                     drawer.close();
                                 }}
+                                variant="outlined"
                             >
                                 <CheckIcon className="size-4" />
                                 <span>{category.name}</span>
