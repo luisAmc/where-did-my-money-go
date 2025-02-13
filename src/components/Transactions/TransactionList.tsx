@@ -29,16 +29,9 @@ export function TransactionList() {
                         </div>
                     </div>
 
-                    <div className="tabular-nums text-sm font-medium">
+                    <div className="text-sm font-medium tabular-nums">
                         {formatAmount(Number(transaction.amount))}
                     </div>
-                    {/* <div className='tabular-nums'>{Number(transaction.amount.toString())}</div>
-
-                    <div>{formatDate(transaction.date, 'dd MMM, yyyy')}</div>
-
-                    <p className="text-muted-foreground text-sm whitespace-pre-wrap">
-                        {transaction.notes ?? '- Sin notas -'}
-                    </p> */}
                 </li>
             ))}
         </ul>

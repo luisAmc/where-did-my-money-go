@@ -64,6 +64,24 @@ export const transactionsRouter = createTRPCRouter({
                     },
                     userId: session.userId,
                 },
+                orderBy: [{ date: 'desc' }, { createdAt: 'desc' }],
+                select: {
+                    id: true,
+                    amount: true,
+                    date: true,
+                    store: true,
+                    notes: true,
+                    category: {
+                        select: {
+                            name: true,
+                        },
+                    },
+                    account: {
+                        select: {
+                            name: true,
+                        },
+                    },
+                },
             });
         }),
 

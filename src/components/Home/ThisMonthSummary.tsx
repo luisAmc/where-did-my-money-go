@@ -1,5 +1,6 @@
 import { api } from '~/utils/api';
 import { endOfMonth, startOfMonth } from 'date-fns';
+import { formatAmount } from '~/utils/transforms';
 
 export function ThisMonthSummary() {
     const today = new Date();
@@ -16,7 +17,7 @@ export function ThisMonthSummary() {
             </span>
 
             <span className="text-6xl font-semibold tabular-nums">
-                {data?.total}
+                {formatAmount(data?.total ?? 0)}
             </span>
 
             <span className="text-muted-foreground text-xs">

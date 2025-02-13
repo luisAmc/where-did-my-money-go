@@ -16,16 +16,19 @@ export function formatDate(
 
 export function formatAmount(
     amount: number,
-    options = { maximumFractionDigits: 2 },
+    options: Intl.NumberFormatOptions = {
+        maximumFractionDigits: 2,
+    },
 ) {
     if (amount == null || isNaN(amount)) {
         return '-';
     }
 
-    return amount.toLocaleString('en', {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: options.maximumFractionDigits,
-    });
+    const currencyAmount = new Intl.NumberFormat('es-HN', options).format(
+        amount,
+    );
+
+    return currencyAmount;
 }
 
 export function plainDateToLocal(plainDateString: string) {

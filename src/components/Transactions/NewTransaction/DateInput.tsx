@@ -19,6 +19,12 @@ export const DateInput = forwardRef<HTMLInputElement, DateInputProps>(
     ) {
         return (
             <label>
+                {label && (
+                    <div className="text-primary mb-2 text-sm leading-none font-medium">
+                        {label}
+                    </div>
+                )}
+
                 <div className="flex items-center">
                     <CalendarIcon className="text-primary absolute ml-4 size-4" />
 
@@ -33,7 +39,7 @@ export const DateInput = forwardRef<HTMLInputElement, DateInputProps>(
                     />
                 </div>
 
-                {/* {!hideError && <FieldError name={props.name} />} */}
+                {!hideError && <FieldError name={props.name} />}
             </label>
         );
     },

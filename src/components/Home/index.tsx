@@ -11,9 +11,15 @@ export function Home() {
             <ThisMonthSummary />
 
             <Card>
-                <h2 className="text-muted-foreground text-xs font-medium uppercase">
-                    Transacciones recientes
-                </h2>
+                <div className="flex items-center justify-between">
+                    <h2 className="text-muted-foreground text-xs font-medium uppercase">
+                        Transacciones del mes
+                    </h2>
+
+                    <Button variant="link" href="/transactions">
+                        Ver más
+                    </Button>
+                </div>
 
                 <TransactionList />
             </Card>

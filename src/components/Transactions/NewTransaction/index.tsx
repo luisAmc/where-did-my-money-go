@@ -57,7 +57,7 @@ export function NewTransaction() {
             <Drawer
                 {...drawer.props}
                 title="Nueva transacción"
-                dismissible={false}
+                // dismissible={false}
             >
                 <Form
                     form={form}
