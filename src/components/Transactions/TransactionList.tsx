@@ -2,38 +2,61 @@ import { api } from '~/utils/api';
 import { formatAmount, formatDate } from '~/utils/transforms';
 
 export function TransactionList() {
-    const { data, isLoading, isFetching, fetchNextPage, hasNextPage } =
-        api.transactions.infinite.useInfiniteQuery(
-            {},
-            { getNextPageParam: (lastPage) => lastPage.nextCursor },
-        );
+    const { data, isLoading } = api.transactions.infinite.useInfiniteQuery(
+        {},
+        { getNextPageParam: (lastPage) => lastPage.nextCursor },
+    );
 
     const transactions = data?.pages.flatMap((page) => page.items) ?? [];
 
-    if (isLoading) return <p>Cargando transacciones...</p>;
-
     return (
-        <ul className="space-y-1 divide-y">
-            {transactions.map((transaction) => (
-                <li
-                    key={transaction.id}
+        <>
+            {isLoading && <Shimmer />}
+
+            {!isLoading && (
+                <ul className="space-y-1 divide-y">
+                    {transactions.map((transaction) => (
+                        <li
+                            key={transaction.id}
+                            className="flex items-center justify-between px-4 py-2"
+                        >
+                            <div className="space-y-0.5">
+                                <div className="text-sm font-medium">
+                                    {transaction.store}
+                                </div>
+
+                                <div className="text-muted-foreground text-xs">
+                                    {formatDate(transaction.date, 'dd MMM')}
+                                </div>
+                            </div>
+
+                            <div className="text-sm font-medium tabular-nums">
+                                {formatAmount(Number(transaction.amount))}
+                            </div>
+                        </li>
+                    ))}
+                </ul>
+            )}
+        </>
+    );
+}
+
+function Shimmer() {
+    return (
+        <div className="divide-secondary animate-pulse divide-y">
+            {Array.from({ length: 5 }).map((_, i) => (
+                <div
+                    key={`shimmer-row-${i}`}
                     className="flex items-center justify-between px-4 py-2"
                 >
-                    <div className="space-y-0.5">
-                        <div className="text-sm font-medium">
-                            {transaction.store}
-                        </div>
-
-                        <div className="text-muted-foreground text-xs">
-                            {formatDate(transaction.date, 'dd MMM')}
-                        </div>
+                    <div className="space-y-1">
+                        <div className="bg-secondary h-4 w-28 rounded-md"></div>
+                        <div className="bg-secondary h-4 w-12 rounded-md"></div>
                     </div>
 
-                    <div className="text-sm font-medium tabular-nums">
-                        {formatAmount(Number(transaction.amount))}
-                    </div>
-                </li>
+                    <div className="bg-secondary h-4 w-16 rounded-md"></div>
+                </div>
             ))}
-        </ul>
+        </div>
     );
 }
