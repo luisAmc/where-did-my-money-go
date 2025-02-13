@@ -11,10 +11,7 @@ interface TextareaProps
 }
 
 export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
-    function Textarea(
-        { label, variant, hideError = false, className, ...props },
-        ref,
-    ) {
+    function Textarea({ variant, className, ...props }, ref) {
         return (
             <textarea
                 ref={ref}

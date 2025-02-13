@@ -2,7 +2,7 @@ import { ComponentPropsWithRef, forwardRef } from 'react';
 import { inputVariants } from '~/components/shared/Input';
 import { cn } from '~/utils/cn';
 
-interface NumberInputProps extends ComponentPropsWithRef<'input'> {}
+type NumberInputProps = ComponentPropsWithRef<'input'>;
 
 export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
     function NumberInput({ ...props }, ref) {

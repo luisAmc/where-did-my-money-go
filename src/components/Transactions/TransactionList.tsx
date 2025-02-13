@@ -1,3 +1,4 @@
+import { CatIcon } from 'lucide-react';
 import { api } from '~/utils/api';
 import { formatAmount, formatDate } from '~/utils/transforms';
 
@@ -15,29 +16,45 @@ export function TransactionList() {
 
             {!isLoading && (
                 <ul className="space-y-1 divide-y">
-                    {transactions.map((transaction) => (
-                        <li
-                            key={transaction.id}
-                            className="flex items-center justify-between px-4 py-2"
-                        >
-                            <div className="space-y-0.5">
-                                <div className="text-sm font-medium">
-                                    {transaction.store}
+                    {transactions.length === 0 ? (
+                        <EmptyTransactions />
+                    ) : (
+                        transactions.map((transaction) => (
+                            <li
+                                key={transaction.id}
+                                className="flex items-center justify-between px-4 py-2"
+                            >
+                                <div className="space-y-0.5">
+                                    <div className="text-sm font-medium">
+                                        {transaction.store}
+                                    </div>
+
+                                    <div className="text-muted-foreground text-xs">
+                                        {formatDate(transaction.date, 'dd MMM')}
+                                    </div>
                                 </div>
 
-                                <div className="text-muted-foreground text-xs">
-                                    {formatDate(transaction.date, 'dd MMM')}
+                                <div className="text-sm font-medium tabular-nums">
+                                    {formatAmount(Number(transaction.amount))}
                                 </div>
-                            </div>
-
-                            <div className="text-sm font-medium tabular-nums">
-                                {formatAmount(Number(transaction.amount))}
-                            </div>
-                        </li>
-                    ))}
+                            </li>
+                        ))
+                    )}
                 </ul>
             )}
         </>
+    );
+}
+
+function EmptyTransactions() {
+    return (
+        <div className="flex flex-col items-center justify-center px-4 py-10">
+            <CatIcon className="text-muted-foreground size-22" />
+
+            <p className="text-muted-foreground text-sm font-medium">
+                No hay transacciones...
+            </p>
+        </div>
     );
 }
 

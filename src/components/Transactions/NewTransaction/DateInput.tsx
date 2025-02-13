@@ -13,10 +13,7 @@ interface DateInputProps
 }
 
 export const DateInput = forwardRef<HTMLInputElement, DateInputProps>(
-    function DateInput(
-        { label, type = 'text', hideError = false, className, ...props },
-        ref,
-    ) {
+    function DateInput({ label, hideError = false, className, ...props }, ref) {
         return (
             <label>
                 {label && (
@@ -33,6 +30,7 @@ export const DateInput = forwardRef<HTMLInputElement, DateInputProps>(
                         className={cn(
                             inputVariants({ variant: 'default' }),
                             'relative pl-10',
+                            className
                         )}
                         type="date"
                         {...props}
