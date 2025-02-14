@@ -140,6 +140,7 @@ function SortableCard({ account, onEdit }: SortableCardProps) {
             style={{
                 transform: CSS.Transform.toString(transform),
                 transition,
+                touchAction: 'none',
             }}
         >
             <div className="flex items-center gap-x-2">
