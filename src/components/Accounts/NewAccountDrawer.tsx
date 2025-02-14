@@ -52,7 +52,7 @@ export function NewAccountDrawer() {
                     <Input
                         {...form.register('name')}
                         label="Nombre"
-                        placeholder="¿Como se llamará cuenta?"
+                        placeholder="¿Como se llamará la cuenta?"
                     />
 
                     <SubmitButton>Crear</SubmitButton>

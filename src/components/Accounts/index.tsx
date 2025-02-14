@@ -1,4 +1,4 @@
-import { ArrowLeftIcon, CatIcon, GripIcon } from 'lucide-react';
+import { ArrowLeftIcon, CatIcon, GripIcon, PencilIcon } from 'lucide-react';
 import { Button } from '../shared/Button';
 import { NewAccountDrawer } from './NewAccountDrawer';
 import { api, RouterOutputs } from '~/utils/api';
@@ -7,6 +7,7 @@ import { closestCenter, DndContext, DragEndEvent } from '@dnd-kit/core';
 import { arrayMove, SortableContext, useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { useEffect, useState } from 'react';
+import { EditAccountDrawer } from './EditAccountDrawer';
 
 type AccountType = RouterOutputs['accounts']['all'][number];
 
@@ -22,6 +23,9 @@ export function Accounts() {
     const accounts = data ?? [];
 
     const [items, setItems] = useState<Array<AccountType>>([]);
+    const [accountToEdit, setAccountToEdit] = useState<AccountType | null>(
+        null,
+    );
 
     useEffect(() => {
         if (accounts.length === 0) return;
@@ -95,6 +99,7 @@ export function Accounts() {
                                         <SortableCard
                                             key={item.id}
                                             account={item}
+                                            onEdit={setAccountToEdit}
                                         />
                                     ))}
                                 </SortableContext>
@@ -103,6 +108,10 @@ export function Accounts() {
                     </Card>
 
                     <NewAccountDrawer />
+                    <EditAccountDrawer
+                        account={accountToEdit}
+                        onClose={() => setAccountToEdit(null)}
+                    />
                 </>
             )}
         </div>
@@ -111,9 +120,10 @@ export function Accounts() {
 
 interface SortableCardProps {
     account: AccountType;
+    onEdit(account: AccountType): void;
 }
 
-function SortableCard({ account }: SortableCardProps) {
+function SortableCard({ account, onEdit }: SortableCardProps) {
     const { attributes, listeners, setNodeRef, transform, transition } =
         useSortable({
             id: account.id,
@@ -126,16 +136,27 @@ function SortableCard({ account }: SortableCardProps) {
     return (
         <div
             ref={setNodeRef}
-            className="bg-secondary text-secondary-foreground flex items-center justify-between rounded-md px-2 py-4 text-sm font-medium"
+            className="bg-secondary text-secondary-foreground flex items-center justify-between rounded-md px-2 py-4 text-sm font-medium select-none"
             style={{
                 transform: CSS.Transform.toString(transform),
                 transition,
             }}
         >
-            <span>{account.name}</span>
+            <div className="flex items-center gap-x-2">
+                <Button
+                    size="icon"
+                    variant="ghost"
+                    {...attributes}
+                    {...listeners}
+                >
+                    <GripIcon className="size-4" />
+                </Button>
 
-            <Button size="icon" variant="ghost" {...attributes} {...listeners}>
-                <GripIcon className="size-4" />
+                <span>{account.name}</span>
+            </div>
+
+            <Button size="icon" variant="ghost" onClick={() => onEdit(account)}>
+                <PencilIcon className="size-4" />
             </Button>
         </div>
     );

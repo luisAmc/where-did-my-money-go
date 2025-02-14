@@ -1,4 +1,10 @@
-import { ArrowLeftIcon, CatIcon, GridIcon, GripIcon } from 'lucide-react';
+import {
+    ArrowLeftIcon,
+    CatIcon,
+    GridIcon,
+    GripIcon,
+    PencilIcon,
+} from 'lucide-react';
 import { Button } from '../shared/Button';
 import { NewCategoryDrawer } from './NewCategoryDrawer';
 import { api, RouterOutputs } from '~/utils/api';
@@ -7,6 +13,7 @@ import { useEffect, useState } from 'react';
 import { closestCenter, DndContext, DragEndEvent } from '@dnd-kit/core';
 import { arrayMove, SortableContext, useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import { EditCategoryDrawer } from './EditCategoryDrawer';
 
 type CategoryType = RouterOutputs['categories']['all'][number];
 
@@ -22,6 +29,9 @@ export function Categories() {
     const categories = data ?? [];
 
     const [items, setItems] = useState<Array<CategoryType>>([]);
+    const [categoryToEdit, setCategoryToEdit] = useState<CategoryType | null>(
+        null,
+    );
 
     useEffect(() => {
         if (categories.length === 0) return;
@@ -95,24 +105,19 @@ export function Categories() {
                                         <SortableCard
                                             key={item.id}
                                             category={item}
+                                            onEdit={setCategoryToEdit}
                                         />
                                     ))}
-                                    {/* <div className="divide-y rounded-lg">
-                                        {categories.map((category) => (
-                                            <article
-                                                key={category.id}
-                                                className="px-2 py-4 text-sm font-medium"
-                                            >
-                                                {category.name}
-                                            </article>
-                                        ))}
-                                    </div> */}
                                 </SortableContext>
                             </DndContext>
                         )}
                     </Card>
 
                     <NewCategoryDrawer />
+                    <EditCategoryDrawer
+                        category={categoryToEdit}
+                        onClose={() => setCategoryToEdit(null)}
+                    />
                 </>
             )}
         </div>
@@ -121,9 +126,10 @@ export function Categories() {
 
 interface SortableCardProps {
     category: CategoryType;
+    onEdit(category: CategoryType): void;
 }
 
-function SortableCard({ category }: SortableCardProps) {
+function SortableCard({ category, onEdit }: SortableCardProps) {
     const { attributes, listeners, setNodeRef, transform, transition } =
         useSortable({
             id: category.id,
@@ -136,16 +142,31 @@ function SortableCard({ category }: SortableCardProps) {
     return (
         <div
             ref={setNodeRef}
-            className="bg-secondary text-secondary-foreground flex items-center justify-between rounded-md px-2 py-4 text-sm font-medium"
+            className="bg-secondary text-secondary-foreground flex items-center justify-between rounded-md px-2 py-4 text-sm font-medium select-none"
             style={{
                 transform: CSS.Transform.toString(transform),
                 transition,
             }}
         >
-            <span>{category.name}</span>
+            <div className="flex items-center gap-x-2">
+                <Button
+                    size="icon"
+                    variant="ghost"
+                    {...attributes}
+                    {...listeners}
+                >
+                    <GripIcon className="size-4" />
+                </Button>
 
-            <Button size="icon" variant="ghost" {...attributes} {...listeners}>
-                <GripIcon className="size-4" />
+                <span>{category.name}</span>
+            </div>
+
+            <Button
+                size="icon"
+                variant="ghost"
+                onClick={() => onEdit(category)}
+            >
+                <PencilIcon className="size-4" />
             </Button>
         </div>
     );

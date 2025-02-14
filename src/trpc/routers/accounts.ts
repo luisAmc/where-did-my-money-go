@@ -28,6 +28,25 @@ export const accountRouter = createTRPCRouter({
             });
         }),
 
+    edit: privateProcedure
+        .input(
+            z.object({
+                id: stringShape.min(1),
+                name: stringShape.min(1),
+            }),
+        )
+        .mutation(async ({ ctx: { db, session }, input }) => {
+            return db.account.update({
+                where: {
+                    id: input.id,
+                    userId: session.userId,
+                },
+                data: {
+                    name: input.name,
+                },
+            });
+        }),
+
     reorder: privateProcedure
         .input(
             z.object({
