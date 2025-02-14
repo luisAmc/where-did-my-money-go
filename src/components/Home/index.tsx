@@ -10,7 +10,7 @@ export function Home() {
         <div className="flex flex-1 flex-col gap-y-2">
             <ThisMonthSummary />
 
-            <Card>
+            <Card className="mx-2">
                 <div className="flex items-center justify-between">
                     <h2 className="text-muted-foreground text-xs font-medium uppercase">
                         Transacciones del mes

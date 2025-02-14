@@ -10,7 +10,7 @@ export function Card({ children, className }: CardProps) {
     return (
         <section
             className={cn(
-                'bg-card text-card-foreground mx-2 flex flex-col gap-y-2 rounded-lg border p-4',
+                'bg-card text-card-foreground flex flex-col gap-y-2 rounded-lg border p-4',
                 className,
             )}
         >
