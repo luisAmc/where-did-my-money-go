@@ -45,7 +45,13 @@ export const transactionsRouter = createTRPCRouter({
                 nextCursor = nextItem!.id;
             }
 
-            return { items: transactions, nextCursor };
+            return {
+                items: transactions.map((transaction) => ({
+                    ...transaction,
+                    amount: transaction.amount.toNumber(),
+                })),
+                nextCursor,
+            };
         }),
 
     inRange: privateProcedure
@@ -56,7 +62,7 @@ export const transactionsRouter = createTRPCRouter({
             }),
         )
         .query(async ({ ctx: { db, session }, input }) => {
-            return db.transaction.findMany({
+            const transactions = await db.transaction.findMany({
                 where: {
                     date: {
                         gte: input.from,
@@ -83,6 +89,11 @@ export const transactionsRouter = createTRPCRouter({
                     },
                 },
             });
+
+            return transactions.map((transaction) => ({
+                ...transaction,
+                amount: transaction.amount.toNumber(),
+            }));
         }),
 
     all: privateProcedure.query(async ({ ctx: { db, session } }) => {

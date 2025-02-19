@@ -12,8 +12,9 @@ import { EditAccountDrawer } from './EditAccountDrawer';
 type AccountType = RouterOutputs['accounts']['all'][number];
 
 export function Accounts() {
-    const queryClient = api.useUtils();
     const { data, isLoading } = api.accounts.all.useQuery();
+
+    const queryClient = api.useUtils();
     const reorderAccounts = api.accounts.reorder.useMutation({
         onSuccess() {
             queryClient.accounts.all.invalidate();

@@ -18,8 +18,9 @@ import { EditCategoryDrawer } from './EditCategoryDrawer';
 type CategoryType = RouterOutputs['categories']['all'][number];
 
 export function Categories() {
-    const queryClient = api.useUtils();
     const { data, isLoading } = api.categories.all.useQuery();
+
+    const queryClient = api.useUtils();
     const reorderCategories = api.categories.reorder.useMutation({
         onSuccess() {
             queryClient.categories.all.invalidate();
