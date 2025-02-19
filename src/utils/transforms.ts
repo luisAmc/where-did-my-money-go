@@ -17,6 +17,7 @@ export function formatDate(
 export function formatAmount(
     amount: number,
     options: Intl.NumberFormatOptions = {
+        minimumFractionDigits: 2,
         maximumFractionDigits: 2,
     },
 ) {
