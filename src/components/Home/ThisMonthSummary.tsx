@@ -1,13 +1,13 @@
 import { api } from '~/utils/api';
-import { endOfMonth, startOfMonth } from 'date-fns';
 import { formatAmount } from '~/utils/transforms';
+import { getZonedEndOfMonth, getZonedStartOfMonth } from '~/utils/dates';
 
 export function ThisMonthSummary() {
     const today = new Date();
 
     const { data, isLoading } = api.transactions.summary.useQuery({
-        from: startOfMonth(today),
-        to: endOfMonth(today),
+        from: getZonedStartOfMonth(today),
+        to: getZonedEndOfMonth(today),
     });
 
     return (

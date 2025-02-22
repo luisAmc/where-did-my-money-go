@@ -2,8 +2,8 @@ import { appRouter } from '~/trpc/root';
 import { authenticatedRoute } from '~/utils/redirects';
 import { createServerSideHelpers } from '@trpc/react-query/server';
 import { db } from '~/utils/prisma';
-import { endOfMonth, startOfMonth } from 'date-fns';
 import { GetServerSideProps } from 'next';
+import { getZonedEndOfMonth, getZonedStartOfMonth } from '~/utils/dates';
 import { resolveSession } from '~/utils/sessions';
 import SuperJSON from 'superjson';
 
@@ -27,9 +27,12 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
     const today = new Date();
 
+    const from = getZonedStartOfMonth(today);
+    const to = getZonedEndOfMonth(today);
+
     await helpers.transactions.inRange.prefetch({
-        from: startOfMonth(today),
-        to: endOfMonth(today),
+        from: from,
+        to: to,
     });
 
     return {
