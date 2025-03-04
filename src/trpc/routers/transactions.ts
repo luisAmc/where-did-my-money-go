@@ -163,6 +163,10 @@ export const transactionsRouter = createTRPCRouter({
         .query(async ({ ctx: { db, session }, input }) => {
             const summary = await db.transaction.aggregate({
                 where: {
+                    date: {
+                        gte: input.from,
+                        lte: input.to,
+                    },
                     userId: session.userId,
                 },
                 _sum: {

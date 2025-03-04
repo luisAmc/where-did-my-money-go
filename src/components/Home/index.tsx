@@ -13,7 +13,7 @@ export function Home() {
             <Card className="mx-2">
                 <div className="flex items-center justify-between">
                     <h2 className="text-muted-foreground text-xs font-medium uppercase">
-                        Transacciones del mes
+                        Últimas transacciones
                     </h2>
 
                     <Button variant="link" href="/transactions">
